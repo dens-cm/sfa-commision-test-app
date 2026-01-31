@@ -1,0 +1,23 @@
+Tools used:
+
+For SQL
+    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+    dotnet add package Microsoft.EntityFrameworkCore.
+    dotnet add package Microsoft.EntityFrameworkCore.Design
+
+For Swagger
+    dotnet add package Swashbuckle.AspNetCore
+
+For .NET EF Tool (Install Globally) - To communicate and take action from API to Backend
+    dotnet tool install --global dotnet-ef
+    dotnet ef --version (for checking the version installed)
+
+To Add the New Table Created at Models folder
+    dotnet ef migrations add InitialCreate (Add)
+    dotnet ef database update (Update)
+
+Use Bcrypt for Password Hash
+    dotnet add package BCrypt.Net-Next
+
+For JWT Bearer
+    dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
