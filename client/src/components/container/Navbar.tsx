@@ -81,7 +81,7 @@ export default function Navbar({ view, currentView, userType, authLoading }: Nav
                                                             const Icon = item.icon
 
                                                             return (
-                                                                <Button key={item.key} onClick={() => view(item.key)} w="100%" colorPalette={currentView === item.key ? "teal" : "gray"} variant={currentView === item.key ? "solid" : "subtle"} size="sm" fontSize=".8rem" textTransform="capitalize" display="flex" justifyContent="left" _hover={{ bg: "teal", color: "white" }} borderRadius="xl">
+                                                                <Button key={item.key} onClick={() => view(item.key)} w="100%" colorPalette={currentView === item.key ? "blue" : "gray"} variant={currentView === item.key ? "solid" : "subtle"} size="sm" fontSize=".8rem" textTransform="capitalize" display="flex" justifyContent="left" _hover={{ bg: "blue", color: "white" }} borderRadius="xl">
                                                                     <Icon />
                                                                     <Text truncate>{item.label}</Text>
                                                                 </Button>
@@ -103,7 +103,7 @@ export default function Navbar({ view, currentView, userType, authLoading }: Nav
                                                             const Icon = item.icon
 
                                                             return (
-                                                                <IconButton key={item.key} onClick={() => view(item.key)} colorPalette={currentView === item.key ? "teal" : "gray"} variant={currentView === item.key ? "solid" : "subtle"} size='sm' fontSize='.7rem' borderRadius='xl'><Icon /></IconButton>
+                                                                <IconButton key={item.key} onClick={() => view(item.key)} colorPalette={currentView === item.key ? "blue" : "gray"} variant={currentView === item.key ? "solid" : "subtle"} size='sm' fontSize='.7rem' borderRadius='xl'><Icon /></IconButton>
                                                             )
                                                         })}
                                                     </Stack>

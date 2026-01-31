@@ -75,7 +75,7 @@ export default function MenuDrawer({ openDrawer, closeDrawer, view, currentView,
                                                     const Icon = item.icon
 
                                                     return (
-                                                        <Button key={item.key} onClick={() => switchView(item.key)} w="100%" colorPalette={currentView === item.key ? "teal" : "gray"} variant={currentView === item.key ? "solid" : "subtle"} size="sm" fontSize=".8rem" textTransform="capitalize" display="flex" justifyContent="left" _hover={{ bg: "teal", color: "white" }} borderRadius="xl">
+                                                        <Button key={item.key} onClick={() => switchView(item.key)} w="100%" colorPalette={currentView === item.key ? "blue" : "gray"} variant={currentView === item.key ? "solid" : "subtle"} size="sm" fontSize=".8rem" textTransform="capitalize" display="flex" justifyContent="left" _hover={{ bg: "blue", color: "white" }} borderRadius="xl">
                                                             <Icon />
                                                             <Text truncate>{item.label}</Text>
                                                         </Button>

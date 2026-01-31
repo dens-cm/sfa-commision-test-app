@@ -1,5 +1,5 @@
 import {
-    BiSolidDashboard, 
+    BiSolidDashboard,
     // BiSolidBookmarks, BiSolidArchive, BiSolidBriefcase, BiSolidShip,
     // BiSolidCreditCardFront, BiSolidLayer, BiSolidNotepad, BiSolidMessageCheck, BiSolidFolderOpen,
     // BiSolidBriefcaseAlt2, BiSolidWallet, BiSolidTruck, BiSolidBank //, BiSolidCoinStack
@@ -26,6 +26,13 @@ export const getViewsConfig = (userType?: UserType): ViewSection[] => [
         items: [
             { key: "dashboard", label: "Dashboard", icon: BiSolidDashboard },
             { key: "admin-dashboard", label: "Admin Dashboard", icon: BiSolidDashboard, hidden: userType !== type.ADMIN },
+        ]
+    },
+    {
+        section: "Incentives",
+        roles: [type.ADMIN],
+        items: [
+            { key: "incentives", label: "Incentives", icon: BiSolidDashboard }
         ]
     }
 ]

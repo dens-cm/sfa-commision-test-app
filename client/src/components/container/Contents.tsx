@@ -9,9 +9,10 @@ import Header from '@/components/container/Header'
 
 // Pages
 import Dashboard from '@/pages/protected/Dashboard'
+import Incentives from '@/pages/protected/Incentives'
 
 // Admin Pages
-// import AdminDashboard from '@/pages/protected/admin/Dashboard'
+import AdminDashboard from '@/pages/protected/admin/Dashboard'
 
 export default function Contents() {
 
@@ -34,6 +35,8 @@ export default function Contents() {
                         <Routes>
                             <Route path='/*' element={<Navigate to='/dashboard' />} />
                             <Route path='dashboard' element={<Dashboard />} />
+                            <Route path='admin-dashboard' element={<AdminDashboard />} />
+                            <Route path='incentives' element={<Incentives />} />
                         </Routes>
                     </Box>
                 </Box>
