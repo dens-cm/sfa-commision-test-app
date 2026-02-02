@@ -10,6 +10,7 @@ import Header from '@/components/container/Header'
 // Pages
 import Dashboard from '@/pages/protected/Dashboard'
 import Incentives from '@/pages/protected/Incentives'
+import Variables from '@/pages/protected/Variables'
 
 // Admin Pages
 import AdminDashboard from '@/pages/protected/admin/Dashboard'
@@ -37,6 +38,7 @@ export default function Contents() {
                             <Route path='dashboard' element={<Dashboard />} />
                             <Route path='admin-dashboard' element={<AdminDashboard />} />
                             <Route path='incentives' element={<Incentives />} />
+                            <Route path='variables' element={<Variables />} />
                         </Routes>
                     </Box>
                 </Box>

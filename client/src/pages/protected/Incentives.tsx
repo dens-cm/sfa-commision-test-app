@@ -26,8 +26,8 @@ export default function Incentives() {
                         <Table.Header>
                             <Table.Row bg='green' borderRadius='xl'>
                                 <Table.ColumnHeader rowSpan={3} p='.3rem .5rem' color='white' fontSize='.7rem' textTransform='uppercase'>BBDM</Table.ColumnHeader>
-                                <Table.ColumnHeader colSpan={8} p='.3rem .5rem' color='white' fontSize='.7rem' textTransform='uppercase' textAlign='center'>October - 24</Table.ColumnHeader>
-                                <Table.ColumnHeader colSpan={8} p='.3rem .5rem' color='white' fontSize='.7rem' textTransform='uppercase' textAlign='center'>November - 24</Table.ColumnHeader>
+                                <Table.ColumnHeader colSpan={8} p='.3rem .5rem' color='white' fontSize='.7rem' textTransform='uppercase' textAlign='center'>[Quarter] October - 24</Table.ColumnHeader>
+                                <Table.ColumnHeader colSpan={8} p='.3rem .5rem' color='white' fontSize='.7rem' textTransform='uppercase' textAlign='center'>[Quarter] November - 24</Table.ColumnHeader>
                             </Table.Row>
                             <Table.Row bg='green' borderRadius='xl'>
                                 <Table.ColumnHeader colSpan={5} p='.3rem .5rem' color='white' fontSize='.7rem' textTransform='uppercase' textAlign='center'>Peso Sales</Table.ColumnHeader>

@@ -39,7 +39,7 @@ export default function Header({ view, currentView, userType, authLoading }: Hea
                         </Avatar.Root>
                         <Text m='0 .5rem' fontSize='.9rem' fontWeight='bold'>Test Account</Text>
                     </Box>
-                    <Button onClick={openLogoutDialog} size='xs' colorPalette='red' fontSize='.7rem' fontWeight='bold' textTransform='uppercase' borderRadius='xl'>Log out</Button>
+                    <Button onClick={openLogoutDialog} size='xs' h='1.5rem' colorPalette='red' fontSize='.6rem' fontWeight='bold' textTransform='uppercase' borderRadius='lg'>Log out</Button>
                 </Box>
             )}
 
