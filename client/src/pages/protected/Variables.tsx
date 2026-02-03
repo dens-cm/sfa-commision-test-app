@@ -2,17 +2,21 @@ import React from 'react'
 import { Badge, Box, Button, Heading, Table, TableScrollArea, Text } from "@chakra-ui/react"
 import { BiSolidEditAlt, BiSolidFolderOpen, BiSolidFolderPlus } from 'react-icons/bi'
 import NewMonthlyTargetSalesDialog from "@/components/dialog/protected/NewMonthlyTargetSalesDialog"
+import UpdateMonthlyTargetSalesDetailsDialog from '@/components/dialog/protected/UpdateMonthlyTargetSalesDetailsDialog'
 import MonthlyTargetSalesDetailsDialog from '@/components/dialog/protected/MonthlyTargetSalesDetailsDialog'
 
 export default function Variables() {
 
     const [isNewMonthlyTargetSalesDialogOpen, setIsNewMonthlyTargetSalesDialogOpen] = React.useState<boolean>(false)
+    const [isUpdateMonthlyTargetSalesDialogOpen, setIsUpdateMonthlyTargetSalesDialogOpen] = React.useState<boolean>(false)
     const [isMonthlyTargetSalesDetailsDialogOpen, setIsMonthlyTargetSalesDetailsDialogOpen] = React.useState<boolean>(false)
 
     //#region Dialog Trigger 
 
     const openNewMonthlyTargetSalesDialog = () => setIsNewMonthlyTargetSalesDialogOpen(true)
     const closeNewMonthlyTargetSalesDialog = () => setIsNewMonthlyTargetSalesDialogOpen(false)
+    const openUpdateMonthlyTargetSalesDialog = () => setIsUpdateMonthlyTargetSalesDialogOpen(true)
+    const closeUpdateMonthlyTargetSalesDialog = () => setIsUpdateMonthlyTargetSalesDialogOpen(false)
     const openMonthlyTargetSalesDetailsDialog = () => setIsMonthlyTargetSalesDetailsDialogOpen(true)
     const closeMonthlyTargetSalesDetailsDialog = () => setIsMonthlyTargetSalesDetailsDialogOpen(false)
 
@@ -61,7 +65,7 @@ export default function Variables() {
                                 <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>
                                     <Box display='flex' justifyContent='center' gap='.3rem'>
                                         <Button onClick={openMonthlyTargetSalesDetailsDialog} size='xs' h='1.5rem' colorPalette='teal' fontSize='.6rem' textTransform='uppercase' borderRadius='lg'><BiSolidFolderOpen /> Check Details</Button>
-                                        <Button size='xs' h='1.5rem' colorPalette='blue' fontSize='.6rem' textTransform='uppercase' borderRadius='lg'><BiSolidEditAlt />Update</Button>
+                                        <Button onClick={openUpdateMonthlyTargetSalesDialog} size='xs' h='1.5rem' colorPalette='blue' fontSize='.6rem' textTransform='uppercase' borderRadius='lg'><BiSolidEditAlt />Update</Button>
                                     </Box>
                                 </Table.Cell>
                             </Table.Row>
@@ -88,7 +92,7 @@ export default function Variables() {
                                 <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>
                                     <Box display='flex' justifyContent='center' gap='.3rem'>
                                         <Button onClick={openMonthlyTargetSalesDetailsDialog} size='xs' h='1.5rem' colorPalette='teal' fontSize='.6rem' textTransform='uppercase' borderRadius='lg'><BiSolidFolderOpen /> Check Details</Button>
-                                        <Button size='xs' h='1.5rem' colorPalette='blue' fontSize='.6rem' textTransform='uppercase' borderRadius='lg'><BiSolidEditAlt />Update</Button>
+                                        <Button onClick={openUpdateMonthlyTargetSalesDialog} size='xs' h='1.5rem' colorPalette='blue' fontSize='.6rem' textTransform='uppercase' borderRadius='lg'><BiSolidEditAlt />Update</Button>
                                     </Box>
                                 </Table.Cell>
                             </Table.Row>
@@ -105,6 +109,7 @@ export default function Variables() {
 
             {/* Dialog */}
             <NewMonthlyTargetSalesDialog openDialog={isNewMonthlyTargetSalesDialogOpen} closeDialog={closeNewMonthlyTargetSalesDialog} />
+            <UpdateMonthlyTargetSalesDetailsDialog openDialog={isUpdateMonthlyTargetSalesDialogOpen} closeDialog={closeUpdateMonthlyTargetSalesDialog} />
             <MonthlyTargetSalesDetailsDialog openDialog={isMonthlyTargetSalesDetailsDialogOpen} closeDialog={closeMonthlyTargetSalesDetailsDialog} />
         </Box>
     )

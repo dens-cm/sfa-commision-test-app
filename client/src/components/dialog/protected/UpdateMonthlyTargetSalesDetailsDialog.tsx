@@ -1,24 +1,24 @@
 import React from 'react'
 import { Input, Dialog, Field, IconButton, Portal, Stack, Select, createListCollection, Button, Badge, Text, Box, SimpleGrid, HStack, Blockquote } from "@chakra-ui/react"
-import { BiCheck, BiSolidFolderPlus, BiX } from "react-icons/bi"
+import { BiCheck, BiSolidEditAlt, BiX } from "react-icons/bi"
 
 type DialogProps = {
     openDialog: boolean
     closeDialog: () => void
 }
 
-export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }: DialogProps) {
+export default function UpdateMonthlyTargetSalesDetailsDialog({ openDialog, closeDialog }: DialogProps) {
 
-    const [selectedQuarter, setSelectedQuarter] = React.useState<number | null>(null)
-    const [selectedYear, setSelectedYear] = React.useState<number | null>(null)
-    const [selectedGroup, setSelectedGroup] = React.useState<number | null>(null)
+    const [selectedQuarter, setSelectedQuarter] = React.useState<string | null>('1')
+    const [selectedYear, setSelectedYear] = React.useState<string | null>('2026')
+    const [selectedGroup, setSelectedGroup] = React.useState<string | null>('1')
 
     const quarters = createListCollection({
         items: [
-            { label: "1st Quarter", value: 1 },
-            { label: "2nd Quarter", value: 2 },
-            { label: "3rd Quarter", value: 3 },
-            { label: "4th Quarter", value: 4 }
+            { label: "1st Quarter", value: "1" },
+            { label: "2nd Quarter", value: "2" },
+            { label: "3rd Quarter", value: "3" },
+            { label: "4th Quarter", value: "4" }
         ]
     })
 
@@ -32,7 +32,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                 const year = startYear + i
                 return {
                     label: year.toString(),
-                    value: year
+                    value: year.toString()
                 }
             }
         )
@@ -40,9 +40,9 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
 
     const productGroups = createListCollection({
         items: [
-            { label: "Group A", value: 1 },
-            { label: "Group B", value: 2 },
-            { label: "Group C", value: 3 }
+            { label: "Group A", value: "1" },
+            { label: "Group B", value: "2" },
+            { label: "Group C", value: "3" }
         ]
     })
 
@@ -69,9 +69,9 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
     const selectedGroupLabel = productGroups.items.find(g => g.value === selectedGroup)?.label
 
     const onCloseDialog = () => {
-        setSelectedQuarter(null)
-        setSelectedYear(null)
-        setSelectedGroup(null)
+        setSelectedQuarter('1')
+        setSelectedYear('2026')
+        setSelectedGroup('1')
         closeDialog()
     }
 
@@ -83,7 +83,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                     <Dialog.Positioner p={{ base: '.5rem', md: '0' }}>
                         <Dialog.Content p='0 .5rem' borderRadius='xl'>
                             <Dialog.Header p='.5rem 0' display='flex' justifyContent='space-between'>
-                                <Badge h='100' w='100%' variant='solid' colorPalette='green' fontSize='.7rem' fontWeight='bold' textTransform='uppercase' borderRadius='lg'><BiSolidFolderPlus /> New Target Sales</Badge>
+                                <Badge h='100' w='100%' variant='solid' colorPalette='blue' fontSize='.7rem' fontWeight='bold' textTransform='uppercase' borderRadius='lg'><BiSolidEditAlt /> Update Target Sales</Badge>
                                 <IconButton onClick={onCloseDialog} size='xs' variant='subtle' colorPalette='blue' borderRadius='lg'>
                                     <BiX />
                                 </IconButton>
@@ -94,7 +94,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                                     {/* Quarter */}
                                     <Field.Root gap='0'>
                                         <Field.Label fontSize='.7rem' textTransform='uppercase'>Quarter</Field.Label>
-                                        <Select.Root required size='xs' collection={quarters} onValueChange={(details) => setSelectedQuarter(details.value[0] ? parseInt(details.value[0], 10) : null)}>
+                                        <Select.Root required readOnly variant='subtle' size='xs' collection={quarters} value={selectedQuarter ? [String(selectedQuarter)] : []} onValueChange={(details) => setSelectedQuarter(details.value[0] ?? null)}>
                                             <Select.HiddenSelect />
                                             <Select.Control>
                                                 <Select.Trigger borderRadius='lg'>
@@ -120,7 +120,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                                     {/* Year */}
                                     <Field.Root gap='0'>
                                         <Field.Label fontSize='.7rem' textTransform='uppercase'>Year</Field.Label>
-                                        <Select.Root required size='xs' collection={years} onValueChange={(details) => setSelectedYear(details.value[0] ? parseInt(details.value[0], 10) : null)}>
+                                        <Select.Root required readOnly variant='subtle' size='xs' collection={years} value={selectedYear ? [selectedYear] : []} onValueChange={(details) => setSelectedYear(details.value[0] ?? null)}>
                                             <Select.HiddenSelect />
                                             <Select.Control>
                                                 <Select.Trigger borderRadius='lg'>
@@ -164,7 +164,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                                     {/* Product Group */}
                                     <Field.Root gap='0'>
                                         <Field.Label fontSize='.7rem' textTransform='uppercase'>Product Group</Field.Label>
-                                        <Select.Root required size='xs' collection={productGroups} onValueChange={(details) => setSelectedGroup(details.value[0] ? parseInt(details.value[0], 10) : null)}>
+                                        <Select.Root required readOnly variant='subtle' size='xs' collection={productGroups} value={selectedGroup ? [String(selectedGroup)] : []} onValueChange={(details) => setSelectedGroup(details.value[0] ?? null)}>
                                             <Select.HiddenSelect />
                                             <Select.Control>
                                                 <Select.Trigger borderRadius='lg'>
@@ -203,10 +203,10 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                                             </Blockquote.Root>
                                             <hr />
                                             <SimpleGrid columns={2} p='.5rem' mt='.5rem' gap='.8rem'>
-                                                {productGroupProducts[selectedGroup].map((product) => (
+                                                {productGroupProducts[parseInt(selectedGroup, 10)].map((product) => (
                                                     <Field.Root key={product} gap='.3rem'>
                                                         <Badge variant='subtle' colorPalette='blue' fontSize='.6rem' fontWeight='bold' textTransform='uppercase' borderRadius='md'>{product}</Badge>
-                                                        <Input type='number' required size='xs' borderRadius='lg' placeholder='Monthly Target Sales' />
+                                                        <Input type='number' required value={1000} size='xs' borderRadius='lg' placeholder='Monthly Target Sales' />
                                                     </Field.Root>
                                                 ))}
                                             </SimpleGrid>
@@ -218,7 +218,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                             <hr />
                             <Dialog.Footer p='.5rem 0' gap='.5rem'>
                                 <Button onClick={onCloseDialog} size='xs' variant='subtle' h='1.7rem' fontSize='.7rem' textTransform='uppercase' borderRadius='lg'><BiX /> Cancel</Button>
-                                <Button type='submit' size='xs' colorPalette='blue' h='1.7rem' fontSize='.7rem' textTransform='uppercase' borderRadius='lg'><BiCheck /> Save</Button>
+                                <Button size='xs' colorPalette='blue' h='1.7rem' fontSize='.7rem' textTransform='uppercase' borderRadius='lg'><BiCheck /> Save</Button>
                             </Dialog.Footer>
                         </Dialog.Content>
                     </Dialog.Positioner>
