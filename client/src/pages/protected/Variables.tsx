@@ -44,7 +44,7 @@ export default function Variables() {
                                     <Badge variant='solid' colorPalette='blue' fontSize='.7rem' fontWeight='bold' borderRadius='lg'>1st Quarter</Badge>
                                 </Table.Cell>
                                 <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>2026</Table.Cell>
-                                <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>January - [End Month]</Table.Cell>
+                                <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>[Start Month] - [End Month]</Table.Cell>
                                 <Table.Cell p='.3rem .5rem' fontSize='.7rem'>
                                     <Box display='flex' alignItems='center' justifyContent='left' gap='.2rem'>
                                         <Text>Group</Text>
@@ -71,7 +71,7 @@ export default function Variables() {
                                     <Badge variant='solid' colorPalette='orange' fontSize='.7rem' fontWeight='bold' borderRadius='lg'>2nd Quarter</Badge>
                                 </Table.Cell>
                                 <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>2026</Table.Cell>
-                                <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>March - [End Month]</Table.Cell>
+                                <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>[Start Month] - [End Month]</Table.Cell>
                                 <Table.Cell p='.3rem .5rem' fontSize='.7rem'>
                                     <Box display='flex' alignItems='center' justifyContent='left' gap='.2rem'>
                                         <Text>Group</Text>

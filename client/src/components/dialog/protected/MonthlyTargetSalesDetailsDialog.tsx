@@ -1,5 +1,5 @@
 // import React from 'react'
-import { Dialog, IconButton, Portal, Stack, Button, Badge, Text, Box, HStack, TableScrollArea, Table } from "@chakra-ui/react"
+import { Dialog, IconButton, Portal, Stack, Button, Badge, Text, Box, HStack, TableScrollArea, Table, Blockquote } from "@chakra-ui/react"
 import { BiSolidFolderOpen, BiX } from "react-icons/bi"
 
 type DialogProps = {
@@ -9,8 +9,6 @@ type DialogProps = {
 
 
 export default function MonthlyTargetSalesDetailsDialog({ openDialog, closeDialog }: DialogProps) {
-
-
 
     const onCloseDialog = () => {
         closeDialog()
@@ -31,31 +29,42 @@ export default function MonthlyTargetSalesDetailsDialog({ openDialog, closeDialo
                             </Dialog.Header>
                             <hr />
                             <Dialog.Body p='.5rem .5rem' display='flex' flexDir='column' gap='1rem'>
-                                <Stack p='0 1rem' gap='.5rem'>
-                                    <HStack w='100%'>
-                                        <Box w='100%'>
-                                            <Text fontSize='.7rem'>Quarter:</Text>
-                                            <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>1st Quarter</Text>
-                                        </Box>
-                                        <Box w='100%'>
-                                            <Text fontSize='.7rem'>Year:</Text>
-                                            <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>2026</Text>
-                                        </Box>
-                                    </HStack>
-                                    <HStack w='100%'>
-                                        <Box w='100%'>
-                                            <Text fontSize='.7rem'>Month:</Text>
-                                            <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>January - [End Month]</Text>
-                                        </Box>
-                                        <Box w='100%'>
-                                            <Text fontSize='.7rem'>Product Group:</Text>
-                                            <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>B</Text>
-                                        </Box>
-                                    </HStack>
-                                </Stack>
-
+                                <Blockquote.Root bg='bg.subtle' p='.5rem'>
+                                    <Blockquote.Content w='100%'>
+                                        <Stack w='100%' gap='.5rem'>
+                                            <HStack w='100%'>
+                                                <Box w='100%'>
+                                                    <Text fontSize='.7rem'>Quarter:</Text>
+                                                    <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>1st Quarter</Text>
+                                                </Box>
+                                                <Box w='100%'>
+                                                    <Text fontSize='.7rem'>Year:</Text>
+                                                    <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>2026</Text>
+                                                </Box>
+                                            </HStack>
+                                            <HStack w='100%'>
+                                                <Box w='100%'>
+                                                    <Text fontSize='.7rem'>Month:</Text>
+                                                    <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>[Start Month] - [End Month]</Text>
+                                                </Box>
+                                                <Box w='100%'>
+                                                    <Text fontSize='.7rem'>Product Group:</Text>
+                                                    <Text fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>B</Text>
+                                                </Box>
+                                            </HStack>
+                                        </Stack>
+                                    </Blockquote.Content>
+                                </Blockquote.Root>
                                 <hr />
-
+                                <Blockquote.Root bg='green.subtle' p='.5rem'>
+                                    <Blockquote.Content w='100%'>
+                                        <HStack w='100%'>
+                                            <Text w='100%' fontSize='.7rem' fontWeight='semibold'>Total Target Sales:</Text>
+                                            <Text w='100%' fontSize='.7rem' fontWeight='bold' textTransform='uppercase'>₱ 20,000.00</Text>
+                                        </HStack>
+                                    </Blockquote.Content>
+                                </Blockquote.Root>
+                                <hr />
                                 <TableScrollArea>
                                     <Table.Root size='sm' w='100%' variant='line' stickyHeader interactive showColumnBorder>
                                         <Table.Header>
@@ -65,14 +74,25 @@ export default function MonthlyTargetSalesDetailsDialog({ openDialog, closeDialo
                                             </Table.Row>
                                         </Table.Header>
                                         <Table.Body>
-                                            <Table.Row bg='gray.100'>
+                                            <Table.Row>
                                                 <Table.Cell p='.3rem .5rem'>
-                                                    <Badge variant='solid' colorPalette='blue' fontSize='.7rem' fontWeight='bold' borderRadius='lg'>Product Name</Badge>
+                                                    <Badge variant='subtle' colorPalette='blue' fontSize='.7rem' fontWeight='bold' borderRadius='lg'>[ Product Name ]</Badge>
                                                 </Table.Cell>
                                                 <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>
                                                     <Box display='flex' alignItems='center' justifyContent='space-between'>
                                                         <Text>₱</Text>
-                                                        <Text>20,000.00</Text>
+                                                        <Text>10,000.00</Text>
+                                                    </Box>
+                                                </Table.Cell>
+                                            </Table.Row>
+                                            <Table.Row>
+                                                <Table.Cell p='.3rem .5rem'>
+                                                    <Badge variant='subtle' colorPalette='blue' fontSize='.7rem' fontWeight='bold' borderRadius='lg'>[ Product Name ]</Badge>
+                                                </Table.Cell>
+                                                <Table.Cell p='.3rem .5rem' fontSize='.7rem' fontWeight='bold'>
+                                                    <Box display='flex' alignItems='center' justifyContent='space-between'>
+                                                        <Text>₱</Text>
+                                                        <Text>10,000.00</Text>
                                                     </Box>
                                                 </Table.Cell>
                                             </Table.Row>

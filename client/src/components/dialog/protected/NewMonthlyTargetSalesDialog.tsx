@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Dialog, Field, IconButton, Portal, Stack, Select, createListCollection, Button, Badge, Text, Box, SimpleGrid } from "@chakra-ui/react"
+import { Input, Dialog, Field, IconButton, Portal, Stack, Select, createListCollection, Button, Badge, Text, Box, SimpleGrid, HStack, Blockquote } from "@chakra-ui/react"
 import { BiCheck, BiSolidFolderPlus, BiX } from "react-icons/bi"
 
 type DialogProps = {
@@ -9,6 +9,8 @@ type DialogProps = {
 
 export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }: DialogProps) {
 
+    const [selectedQuarter, setSelectedQuarter] = React.useState<number | null>(null)
+    const [selectedYear, setSelectedYear] = React.useState<number | null>(null)
     const [selectedGroup, setSelectedGroup] = React.useState<number | null>(null)
 
     const quarters = createListCollection({
@@ -36,18 +38,6 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
         )
     })
 
-    const months = createListCollection({
-        items: Array.from({ length: 12 }, (_, i) => {
-            const date = new Date(2026, i, 1)
-            const label = date.toLocaleString(undefined, { month: "long" })
-
-            return {
-                label,
-                value: i + 1
-            }
-        })
-    })
-
     const productGroups = createListCollection({
         items: [
             { label: "Group A", value: 1 },
@@ -55,6 +45,9 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
             { label: "Group C", value: 3 }
         ]
     })
+
+    const mappedSelectedQuarter = quarters.items.find(q => q.value === selectedQuarter)?.label
+    const mappedSelectedYear = years.items.find(y => y.value === selectedYear)?.label ?? 'N/A'
 
     const productGroupProducts: Record<number, string[]> = {
         1: [
@@ -76,6 +69,8 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
     const selectedGroupLabel = productGroups.items.find(g => g.value === selectedGroup)?.label
 
     const onCloseDialog = () => {
+        setSelectedQuarter(null)
+        setSelectedYear(null)
         setSelectedGroup(null)
         closeDialog()
     }
@@ -99,7 +94,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                                     {/* Quarter */}
                                     <Field.Root gap='0'>
                                         <Field.Label fontSize='.7rem' textTransform='uppercase'>Quarter</Field.Label>
-                                        <Select.Root required size='xs' collection={quarters}>
+                                        <Select.Root required size='xs' collection={quarters} onValueChange={(details) => setSelectedQuarter(details.value[0] ? parseInt(details.value[0], 10) : null)}>
                                             <Select.HiddenSelect />
                                             <Select.Control>
                                                 <Select.Trigger borderRadius='lg'>
@@ -125,7 +120,7 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                                     {/* Year */}
                                     <Field.Root gap='0'>
                                         <Field.Label fontSize='.7rem' textTransform='uppercase'>Year</Field.Label>
-                                        <Select.Root required size='xs' collection={years}>
+                                        <Select.Root required size='xs' collection={years} onValueChange={(details) => setSelectedYear(details.value[0] ? parseInt(details.value[0], 10) : null)}>
                                             <Select.HiddenSelect />
                                             <Select.Control>
                                                 <Select.Trigger borderRadius='lg'>
@@ -147,40 +142,24 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
                                             </Select.Positioner>
                                         </Select.Root>
                                     </Field.Root>
-
-                                    {/* Month */}
-                                    <Field.Root gap='0'>
-                                        <Field.Label fontSize='.7rem' textTransform='uppercase'>Month</Field.Label>
-                                        <Select.Root required size='xs' collection={months}>
-                                            <Select.HiddenSelect />
-                                            <Select.Control>
-                                                <Select.Trigger borderRadius='lg'>
-                                                    <Select.ValueText placeholder="Select Month" fontSize='.8rem' />
-                                                </Select.Trigger>
-                                                <Select.IndicatorGroup>
-                                                    <Select.Indicator />
-                                                </Select.IndicatorGroup>
-                                            </Select.Control>
-                                            <Select.Positioner>
-                                                <Select.Content borderRadius='lg'>
-                                                    {months.items.map((months) => (
-                                                        <Select.Item item={months} key={months.value} fontSize='.8rem'>
-                                                            {months.label}
-                                                            <Select.ItemIndicator />
-                                                        </Select.Item>
-                                                    ))}
-                                                </Select.Content>
-                                            </Select.Positioner>
-                                        </Select.Root>
-                                    </Field.Root>
                                 </Stack>
 
+                                {selectedQuarter && (
+                                    <Box>
+                                        <hr />
+                                        <Blockquote.Root m='.3rem 0' bg='bg.subtle' p='.5rem'>
+                                            <Blockquote.Content>
+                                                <HStack gap='.5rem' fontSize='.7rem' textTransform='uppercase'>
+                                                    <Text fontWeight='semibold'>{mappedSelectedQuarter}:</Text>
+                                                    <Text>[Start Month] - [End Month] | {mappedSelectedYear}</Text>
+                                                </HStack>
+                                            </Blockquote.Content>
+                                        </Blockquote.Root>
+                                        <hr />
+                                    </Box>
+                                )}
+
                                 <Stack direction={{ base: 'column', md: 'row' }}>
-                                    {/* Monthly Target */}
-                                    {/* <Field.Root gap='0'>
-                                        <Field.Label fontSize='.7rem' textTransform='uppercase'>Monthly Target Sales Per Product</Field.Label>
-                                        <Input type='number' required size='xs' fontSize='.8rem' borderRadius='lg' placeholder="Target Sales" />
-                                    </Field.Root> */}
 
                                     {/* Product Group */}
                                     <Field.Root gap='0'>
@@ -211,21 +190,22 @@ export default function NewMonthlyTargetSalesDialog({ openDialog, closeDialog }:
 
                                 {/* Product Selected */}
                                 <Box>
-                                    {!selectedGroup ? (
+                                    {selectedGroup && (
                                         <>
                                             <hr />
-                                            <Text m='.3rem 0' fontSize='.8rem' color='gray.500'>Select product group first.</Text>
-                                            <hr />
-                                        </>
-                                    ) : (
-                                        <>
-                                            <hr />
-                                            <Text m='.3rem 0' fontSize='.7rem' fontWeight='bold'>{selectedGroupLabel} Products:</Text>
+                                            <Blockquote.Root m='.3rem 0' bg='green.subtle' p='.5rem' gap='0'>
+                                                <Blockquote.Content>
+                                                    <Text fontSize='.7rem' fontWeight='bold'>{selectedGroupLabel} Products:</Text>
+                                                </Blockquote.Content>
+                                                <Blockquote.Caption fontSize='.8rem' fontStyle='italic'>
+                                                    (Enter Target Sales Value in Peso)
+                                                </Blockquote.Caption>
+                                            </Blockquote.Root>
                                             <hr />
                                             <SimpleGrid columns={2} p='.5rem' mt='.5rem' gap='.8rem'>
                                                 {productGroupProducts[selectedGroup].map((product) => (
                                                     <Field.Root key={product} gap='.3rem'>
-                                                        <Badge variant='subtle' colorPalette='blue' fontSize='.7rem' fontWeight='bold' borderRadius='lg'>{product}</Badge>
+                                                        <Badge variant='subtle' colorPalette='blue' fontSize='.6rem' fontWeight='bold' textTransform='uppercase' borderRadius='md'>{product}</Badge>
                                                         <Input type='number' required size='xs' borderRadius='lg' placeholder='Monthly Target Sales' />
                                                     </Field.Root>
                                                 ))}
